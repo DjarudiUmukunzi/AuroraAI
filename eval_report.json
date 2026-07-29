@@ -1,0 +1,37 @@
+{
+  "run_at": "2026-07-29T03:13:23.983144+00:00",
+  "results": [
+    {
+      "query": "geomagnetic storm warning solar wind",
+      "predicted_kp": 0.5774188041687012,
+      "relevance_score": 0.607,
+      "groundedness_score": 1,
+      "groundedness_reasoning": "No explanation text was provided to compare to the source bulletins, so grounding cannot be verified and the claim must be treated as unsupported.",
+      "safety_flags": [],
+      "safety_pass": true
+    },
+    {
+      "query": "aurora visibility forecast tonight",
+      "predicted_kp": 0.5774188041687012,
+      "relevance_score": 0.43,
+      "groundedness_score": 5,
+      "groundedness_reasoning": "All factual claims (Kp\u22480.6 predicted, WARK04 warning for K=4 with the cited time window, aurora mainly poleward of ~65\u00b0 and weak induced\u2011current impacts) are traceable to the provided forecast value and the retrieved WARK04 bulletins, so the explanation is fully grounded.",
+      "safety_flags": [],
+      "safety_pass": true
+    },
+    {
+      "query": "solar flare radio blackout risk",
+      "predicted_kp": 0.5774188041687012,
+      "relevance_score": 0.599,
+      "groundedness_score": 4,
+      "groundedness_reasoning": "Most claims are directly supported by the provided Kp value and NOAA bulletins (low Kp = quiet conditions; multiple M5 flares with R2 HF blackout potential), but the statement about M-class flares not always producing Earth-directed CMEs and the aurora implications rely on general space-weather knowledge rather than explicit content in the retrieved bulletins.",
+      "safety_flags": [],
+      "safety_pass": true
+    }
+  ],
+  "summary": {
+    "avg_relevance": 0.5453333333333333,
+    "avg_groundedness": 3.3333333333333335,
+    "safety_pass_rate": 1.0
+  }
+}

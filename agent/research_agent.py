@@ -10,6 +10,7 @@ Run directly for a quick test:
 """
 
 import os
+import time
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -32,12 +33,29 @@ def _get_openai_client() -> OpenAI:
     return OpenAI(api_key=api_key, base_url=base_url)
 
 
+def _embed_with_retry(client: OpenAI, texts: list[str], max_retries: int = 5):
+    """Azure OpenAI serverless embedding deployments occasionally throw
+    transient errors (including a misleading 'unknown_model' message)
+    under back-to-back load. Retrying with backoff resolves this without
+    masking a genuine config problem - if it still fails after
+    max_retries, the real error surfaces."""
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            return client.embeddings.create(model=EMBEDDING_DEPLOYMENT, input=texts)
+        except Exception as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait = 5 * (attempt + 1)  # 5s, 10s, 15s, 20s
+                print(f"[retry] Embedding call failed ({e}); retrying in {wait}s...")
+                time.sleep(wait)
+    raise last_error
+
+
 def research(query: str, top_k: int = 3) -> list[dict]:
     """Embed the query and retrieve the top_k most similar NOAA bulletins."""
     openai_client = _get_openai_client()
-    embedding = openai_client.embeddings.create(
-        model=EMBEDDING_DEPLOYMENT, input=[query]
-    ).data[0].embedding
+    embedding = _embed_with_retry(openai_client, [query]).data[0].embedding
 
     search_client = SearchClient(
         endpoint=SEARCH_ENDPOINT,

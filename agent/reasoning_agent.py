@@ -58,10 +58,10 @@ Research Agent output (retrieved NOAA bulletins):
             {"role": "developer", "content": "You are a concise, accurate space weather reasoning assistant."},
             {"role": "user", "content": prompt},
         ],
-        max_completion_tokens=400,
+        max_completion_tokens=700,
         reasoning_effort="low",
     )
-    return resp.choices[0].message.content.strip()
+    return (resp.choices[0].message.content or "").strip()
 
 
 if __name__ == "__main__":
