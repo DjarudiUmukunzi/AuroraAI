@@ -1,0 +1,5 @@
+# Copy to terraform.tfvars and fill in your own unique suffix
+# (e.g. your name/initials) - storage accounts and Databricks workspace
+# names must be globally unique across all of Azure.
+
+unique_suffix = "djarudi"
