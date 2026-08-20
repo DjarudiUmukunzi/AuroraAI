@@ -41,6 +41,14 @@ resource "azurerm_machine_learning_workspace" "main" {
   storage_account_id       = azurerm_storage_account.ml.id
   public_network_access_enabled = true
 
+  # Azure ML auto-created this container registry at some point (this
+  # happens automatically for certain model/environment registrations).
+  # It must be declared here to match reality - this field is immutable,
+  # so omitting it makes Terraform think it needs to be removed, which
+  # forces a full destroy-and-recreate of the whole workspace. Learned
+  # this the hard way after a workspace soft-delete scare - see git log.
+  container_registry_id = "/subscriptions/c93cca8a-a32b-4063-be80-5637cea65027/resourceGroups/rg-auroraai-dev/providers/Microsoft.ContainerRegistry/registries/a04c4f08bb5548f28c5c8b0701ef3db4"
+
   identity {
     type = "SystemAssigned"
   }

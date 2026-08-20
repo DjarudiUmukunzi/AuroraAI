@@ -1,0 +1,12 @@
+.venv/
+.git/
+__pycache__/
+*.pyc
+.DS_Store
+terraform/.terraform/
+terraform/*.tfstate*
+data/raw/
+agent/_downloaded_models/
+models/*.pkl
+*.log
+node_modules/
