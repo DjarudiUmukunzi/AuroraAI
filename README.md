@@ -2,7 +2,7 @@
 
 An end-to-end space weather forecasting system built on Azure's AI and data platform — live NOAA data ingestion, a governed ML platform, a multi-agent reasoning system, MLOps/GenAIOps tooling, and a dashboard that ties it all together with real-time computer vision.
 
-Built as a hands-on capstone project ahead of a Microsoft Cloud Application Development cohort, aimed at demonstrating production-representative Azure engineering across data, ML, and generative AI — not a tutorial walkthrough.
+
 
 ![Dashboard screenshot](docs/screenshots/dashboard-overview.png)
 ![Vision analysis of live aurora forecast](docs/screenshots/dashboard-vision-analysis.png)
